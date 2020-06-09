@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ViewGroups</string>
+    <string name="pizza_ohotnichya">Пицца Охотничья</string>
+    <string name="som_320">320 сом</string>
+    <string name="pizza_margarita">Пицца Маргарита</string>
+    <string name="som_290">290 сом</string>
+    <string name="zavtraki">Завтраки</string>
+    <string name="som_150">150 сом</string>
+    <string name="sendwich">Сэндвичи</string>
+    <string name="som_120">120 сом</string>
+</resources>
