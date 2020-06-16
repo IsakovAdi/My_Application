@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".RelativePizza">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/firstLinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                app:srcCompat="@drawable/okhotnichya" />
+
+            <TextView
+                android:id="@+id/margarita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пицца Маргарита"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="350 сом"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="В корзину" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                app:srcCompat="@drawable/margarita" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пицца Маргарита"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="290 сом"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="В корзину" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:weightSum="2">-->
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView9"-->
+<!--            android:layout_width="170dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_below="@+id/buy"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:layout_marginTop="2dp"-->
+<!--            app:srcCompat="@drawable/zavtrak" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/zavtrak"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/imageView9"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginStart="75dp"-->
+<!--            android:text="Завтраки"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/cena_150"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/zavtrak"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginStart="79dp"-->
+<!--            android:text="@string/som_150"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button10"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/cena_150"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginStart="65dp"-->
+<!--            android:layout_marginTop="-1dp"-->
+<!--            android:text="В карзину" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView10"-->
+<!--            android:layout_width="170dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_below="@+id/button9"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            app:srcCompat="@drawable/sendwich" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/sendwich"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/imageView10"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="60dp"-->
+<!--            android:text="@string/sendwich"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/cena120"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/sendwich"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="64dp"-->
+<!--            android:text="@string/som_120"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button11"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/cena120"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="35dp"-->
+<!--            android:text="В карзину" />-->
+<!--        -->
+<!--    </LinearLayout>-->
+
+
+
+
+</RelativeLayout>

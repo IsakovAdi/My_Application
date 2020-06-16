@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ViewGroups</string>
+    <string name="app_name">Constraint Layout</string>
     <string name="pizza_ohotnichya">Пицца Охотничья</string>
     <string name="som_320">320 сом</string>
     <string name="pizza_margarita">Пицца Маргарита</string>
@@ -8,4 +8,17 @@
     <string name="som_150">150 сом</string>
     <string name="sendwich">Сэндвичи</string>
     <string name="som_120">120 сом</string>
+    <string name="it_academy_courses">IT Academy Courses</string>
+    <string name="trainers">Trainers</string>
+    <string name="timur_amanov">Timur Amanov</string>
+    <string name="urmat_sagynbaev">Urmat Sagynbaev</string>
+    <string name="edzen_oichiev">Edzen Oichiev</string>
+    <string name="abdylkadyr_musa_uulu">Abdylkadyr Musa uulu</string>
+    <string name="android">Android разработка</string>
+    <string name="front_end">Front-end разработка</string>
+    <string name="back_end">Back-end разработка</string>
+    <string name="android_text">Android разработка - это создание приложений для портативных устройств</string>
+    <string name="front_end_text">Front-end - это создание клиенсткой стороны сайта</string>
+    <string name="start_course">начать курс</string>
+    <string name="python">Python считается высокоуровневым языком программирования</string>
 </resources>
