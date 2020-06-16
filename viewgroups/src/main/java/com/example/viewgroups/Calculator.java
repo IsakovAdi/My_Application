@@ -7,15 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Calculator extends AppCompatActivity implements View.OnClickListener {
     TextView textResult;
     EditText firstText;
     EditText secondText;
-    Button btnPlus;
-    Button btnMinus;
-    Button btnMulty;
-    Button btnDivision;
+    Button btnPlus, btnMinus, btnMulty,btnDivision;
     Double number1;
     Double number2;
 
@@ -42,8 +40,12 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        number1 = Double.parseDouble(firstText.getText().toString());
-        number2 = Double.parseDouble(secondText.getText().toString());
+        try {
+            number1 = Double.parseDouble(firstText.getText().toString());
+            number2 = Double.parseDouble(secondText.getText().toString());
+        } catch (NumberFormatException e){
+            Toast.makeText(Calculator.this,"Enter the number", Toast.LENGTH_SHORT).show();
+        }
         switch (v.getId()){
 
             case R.id.btn_plus:
