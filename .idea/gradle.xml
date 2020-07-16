@@ -11,8 +11,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/androidaudio" />
+            <option value="$PROJECT_DIR$/androidvectors" />
+            <option value="$PROJECT_DIR$/androidvideo" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/imagevideoanimations" />
             <option value="$PROJECT_DIR$/listeners" />
+            <option value="$PROJECT_DIR$/menuoptions" />
+            <option value="$PROJECT_DIR$/music_shop" />
+            <option value="$PROJECT_DIR$/tictactoe" />
             <option value="$PROJECT_DIR$/viewgroups" />
           </set>
         </option>

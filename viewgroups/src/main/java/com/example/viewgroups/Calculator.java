@@ -7,63 +7,47 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Calculator extends AppCompatActivity implements View.OnClickListener {
+public class Calculator extends AppCompatActivity {
     TextView textResult;
     EditText firstText;
-    EditText secondText;
-    Button btnPlus, btnMinus, btnMulty,btnDivision;
-    Double number1;
-    Double number2;
+    Button btnCalculate;
+    char symbol = ' ';
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+
         firstText = findViewById(R.id.text_first);
-
-        secondText = findViewById(R.id.text_second);
-
         textResult = findViewById(R.id.result_number);
-        btnPlus = findViewById(R.id.btn_plus);
-        btnMinus = findViewById(R.id.btn_minus);
-        btnMulty = findViewById(R.id.btn_multy);
-        btnDivision = findViewById(R.id.btn_division);
+        btnCalculate = findViewById(R.id.btn_calculate);
 
-        btnPlus.setOnClickListener(this);
-        btnMinus.setOnClickListener(this);
-        btnMulty.setOnClickListener(this);
-        btnDivision.setOnClickListener(this);
+        btnCalculate.setOnClickListener(new View.OnClickListener() {
 
-    }
+            @Override
+            public void onClick(View v) {
+                    int length = firstText.getText().toString().length();
+                    String text = firstText.getText().toString();
+                    StringBuilder a = new StringBuilder();
+                    StringBuilder b = new StringBuilder();
+                    boolean isOperatorDone = false;
+                    for (int i = 0; i < length; i++) {
+                        if (text.charAt(i) == '+' || text.charAt(i) == '-' || text.charAt(i) == '*' || text.charAt(i) == '/') {
+                            symbol = text.charAt(i);
+                            isOperatorDone = true;
+                            continue;
+                        }
+                        if (isOperatorDone){
+                            b.append(text.charAt(i));
+                        }
+                        else {
+                            a.append(text.charAt(i));
+                        }
+                    }
 
-    @Override
-    public void onClick(View v) {
-        try {
-            number1 = Double.parseDouble(firstText.getText().toString());
-            number2 = Double.parseDouble(secondText.getText().toString());
-        } catch (NumberFormatException e){
-            Toast.makeText(Calculator.this,"Enter the number", Toast.LENGTH_SHORT).show();
-        }
-        switch (v.getId()){
-
-            case R.id.btn_plus:
-                double sum = number1+number2;
-                textResult.setText(String.valueOf(sum));
-                break;
-            case R.id.btn_minus:
-                sum = number1-number2;
-                textResult.setText(String.valueOf(sum));
-                break;
-            case R.id.btn_multy:
-                sum = number1*number2;
-                textResult.setText(String.valueOf(sum));
-                break;
-            case R.id.btn_division:
-                sum = number1/number2;
-                textResult.setText(String.valueOf(sum));
-                break;
-        }
+//                    Toast.makeText(Calculator.this, "a " + a + " b: " + b+ " operator" + symbol, Toast.LENGTH_LONG ).show();
+            }
+        });
     }
 }
