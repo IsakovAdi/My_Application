@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/zerna_kofe"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealView"
         android:padding="4dp"
         android:scrollbars="vertical"
-        android:background="@drawable/zerna_kofe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

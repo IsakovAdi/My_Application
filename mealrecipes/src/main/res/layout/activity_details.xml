@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        tools:context=".DetailsActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <VideoView
+            android:id="@+id/coffeeVideo"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <ImageView
+            android:id="@+id/coffeeImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/coffeeVideo"
+            app:layout_constraintTop_toBottomOf="@+id/coffeeVideo" />
+
+        <TextView
+            android:id="@+id/foodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/coffeeImage"
+            android:text="Food Name"
+            android:textAlignment="center"
+            android:textColor="#5E2D1D"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/coffeeImage"
+            app:layout_constraintTop_toTopOf="@+id/coffeeImage" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/foodName"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/coffeeImage"
+            android:text="description"
+            android:textAlignment="center"
+            android:textColor="#5E2D1D"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/foodName"
+            app:layout_constraintTop_toBottomOf="@+id/foodName" />
+
+
+        <ImageView
+            android:id="@+id/coffeeIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/description"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/coffeeImage"
+            android:padding="2dp"
+            app:layout_constraintEnd_toStartOf="@+id/costIcon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coffeeImage" />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/coffeeIcon"
+            android:text="temperature"
+            android:textColor="#5E2D1D"
+            android:textSize="17sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/coffeeIcon"
+            app:layout_constraintStart_toStartOf="@+id/coffeeIcon"
+            app:layout_constraintTop_toBottomOf="@+id/coffeeIcon" />
+
+        <ImageView
+            android:id="@+id/costIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/description"
+            android:layout_marginStart="40dp"
+            android:layout_toEndOf="@id/temperature"
+            android:background="@drawable/cost_icon"
+            android:padding="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/coffeeIcon"
+            app:layout_constraintTop_toTopOf="@+id/coffeeIcon" />
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_toEndOf="@id/costIcon"
+            android:text="som"
+            android:textColor="#5E2D1D"
+            android:textStyle="italic"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/temperature"
+            app:layout_constraintEnd_toEndOf="@+id/costIcon"
+            app:layout_constraintStart_toStartOf="@+id/costIcon"
+            app:layout_constraintTop_toTopOf="@+id/temperature" />
+
+        <TextView
+            android:id="@+id/ingred"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Ингредиенты:"
+            android:textColor="#5E2D1D"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/coffeeImage"
+            app:layout_constraintTop_toBottomOf="@+id/temperature" />
+
+        <TextView
+            android:id="@+id/ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingred"
+            android:textColor="#5E2D1D"
+            android:padding="20dp"/>
+
+        <TextView
+            android:id="@+id/tech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Технология приготовления"
+            android:textAlignment="center"
+            android:textColor="#5E2D1D"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@+id/ingredients"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/technology"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="Технология такова"
+            android:textColor="#5E2D1D"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.842"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tech" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

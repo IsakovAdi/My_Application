@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/coffeeImage"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/foodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/coffeeImage"
+            android:text="Food Name"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/coffeeImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/foodName"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/coffeeImage"
+            android:text="description"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/coffeeIcon"
+            app:layout_constraintStart_toStartOf="@+id/foodName"
+            app:layout_constraintTop_toBottomOf="@+id/foodName" />
+
+        <ImageView
+            android:id="@+id/coffeeIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_below="@id/description"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/coffeeImage"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/foodName" />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/coffeeIcon"
+            android:text="temperature"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/coffeeIcon"
+            app:layout_constraintStart_toEndOf="@+id/coffeeIcon"
+            app:layout_constraintTop_toTopOf="@+id/coffeeIcon" />
+
+        <ImageView
+            android:id="@+id/costIcon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/temperature"
+            android:background="@drawable/cost_icon"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/temperature"
+            app:layout_constraintStart_toEndOf="@+id/temperature"
+            app:layout_constraintTop_toTopOf="@+id/temperature" />
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/costIcon"
+            android:text="som"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/costIcon"
+            app:layout_constraintStart_toEndOf="@+id/costIcon"
+            app:layout_constraintTop_toTopOf="@+id/costIcon" />
+
+
+        <ImageView
+            android:id="@+id/deleteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cost"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

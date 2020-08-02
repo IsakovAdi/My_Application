@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FavoriteActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:scrollbars="vertical"
+        android:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/emptyCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Корзина пуста"
+            android:textColor="#5E2D1D"
+            android:textSize="22sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/emptyImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/emptyCart"
+            app:layout_constraintEnd_toEndOf="@+id/emptyCart"
+            app:layout_constraintStart_toStartOf="@+id/emptyCart"
+            app:layout_constraintTop_toBottomOf="@+id/emptyCart"
+
+            app:srcCompat="@drawable/baseline_sentiment_very_dissatisfied_black_18dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
