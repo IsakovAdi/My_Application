@@ -4,11 +4,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
-import android.content.ContentValues;
+
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,22 +17,27 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.sqlitecars.data.DatabaseHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    // SQL Room Library
+    // @Database - точка для получения доступа к базе данных
+    // @Entity - Таблица которая должна содержать классы
+    // @Dao - Методы для управления данными таблицы
 
     RecyclerView recyclerView;
     EditText carName, carPrice;
     FloatingActionButton floatingActionButton;
     CarAdapter adapter;
-    DatabaseHandler handler;
     MediaPlayer player;
 
-    List<Car> cars;
+    List<Car> carArrayList = new ArrayList<>();
+    CarsDatabase database;
 
 
     @Override
@@ -39,15 +45,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        handler = new DatabaseHandler(this);
+
         floatingActionButton = findViewById(R.id.floatingActionButton);
-        loadData();
+        database = Room.databaseBuilder(getApplicationContext(), CarsDatabase.class, "CarDB").build();
+
+        new GetAllCarsAsyncTask().execute(); // если в методе передаются какие то данные, мы их передаем в параметрах, а если просто void просто пустыи оставляем и закрываем
+
         buildRecyclerView();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click();
+                clickVoice();
                 insertItemWithDialog();
             }
         });
@@ -55,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new CarAdapter.RecyclerOnClickListener() {
             @Override
             public void onClick(final int position) {
-                click();
+                clickVoice();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("Edit car");
 
@@ -66,15 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 TextInputLayout til1 = layout.findViewById(R.id.textInputLayoutCarPrice);
                 carPrice = til1.findViewById(R.id.eCarPrice);
                 til1.setHint("Car price");
-                carName.setText(cars.get(position).getName());
-                carPrice.setText(cars.get(position).getPrice());
+                carName.setText(carArrayList.get(position).getName());
+                carPrice.setText(carArrayList.get(position).getPrice());
 
                 dialog.setView(layout);
 
                 dialog.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        click();
+                        clickVoice();
                         if (TextUtils.isEmpty(carName.getText().toString())) {
                             Toast.makeText(MainActivity.this, "Please enter the car name", Toast.LENGTH_SHORT).show();
                             return;
@@ -87,53 +96,41 @@ public class MainActivity extends AppCompatActivity {
                         String nameText = carName.getText().toString();
                         String priceText = carPrice.getText().toString();
 
-                        cars.get(position).setName(nameText);
-                        cars.get(position).setPrice(priceText);
-                        handler.updateCar(cars.get(position));
-                        adapter.notifyDataSetChanged();
+                        Car car = carArrayList.get(position);///
+
+                        carArrayList.get(position).setName(nameText);
+                        carArrayList.get(position).setPrice(priceText);
+                        new UpdateCarAsyncTask().execute(car);
+
                     }
                 });
 
                 dialog.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        click();
-                        Car car = cars.get(position);
-                        cars.remove(cars.get(position));
-                        handler.deleteCar(car);
-                        adapter.notifyItemRemoved(position);
+                        clickVoice();
+                        Car car = carArrayList.get(position);
+                        carArrayList.remove(car);
+                        new DeleteCarAsyncTask().execute(car);
+
                     }
                 });
-
                 dialog.show();
-
             }
         });
 
     }
 
-    public void loadData() {
-        handler = new DatabaseHandler(this);
-        cars = handler.getAllCars();
-    }
+//    public void loadData(DatabaseHandler handler) {
+////        handler = new DatabaseHandler(this);
+//        cars = handler.getAllCars();
+//    }
 
     public void buildRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CarAdapter(cars);
+        adapter = new CarAdapter(carArrayList);
         recyclerView.setAdapter(adapter);
-    }
-
-    private void saveDate() {
-        SQLiteDatabase db = handler.getWritableDatabase();
-
-        for (Car c : cars) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(Util.KEY_NAME, c.getName());
-            contentValues.put(Util.KEY_PRICE, c.getPrice());
-            db.insert(Util.TABLE_NAME, null, contentValues);
-        }
-        db.close();
     }
 
     public void insertItemWithDialog() {
@@ -154,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                click();
+                clickVoice();
                 if (TextUtils.isEmpty(carName.getText().toString())) {
                     Toast.makeText(MainActivity.this, "Please enter the car name", Toast.LENGTH_SHORT).show();
                     return;
@@ -167,16 +164,15 @@ public class MainActivity extends AppCompatActivity {
                 String nameText = carName.getText().toString();
                 String priceText = carPrice.getText().toString();
 
-                cars.add(new Car(nameText, priceText));
-                adapter.notifyItemInserted(cars.size());
-                saveDate();
+                new CreateCarAsyncTask().execute(new Car(0, nameText, priceText));
+
             }
         });
 
         dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                click();
+                clickVoice();
                 dialog.dismiss();
             }
         });
@@ -184,8 +180,77 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void click(){
-         player = MediaPlayer.create(this, R.raw.four);
-         player.start();
+    public void clickVoice() {
+        player = MediaPlayer.create(this, R.raw.four);
+        player.start();
+    }
+
+    private class DeleteCarAsyncTask extends AsyncTask<Car,  Void, Void>{
+
+        @Override
+        protected Void doInBackground(Car... cars) {
+            database.getCarDao().deleteCar(cars[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private class UpdateCarAsyncTask extends AsyncTask<Car, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Car... cars) {
+            database.getCarDao().UpdateCar(cars[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private class CreateCarAsyncTask extends AsyncTask<Car, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Car... cars) {
+
+            long id = database.getCarDao().addCar(cars[0]);
+            Car car  = database.getCarDao().getCar(id);
+            if (car!=null){
+                carArrayList.add(0, car);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private class GetAllCarsAsyncTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {  //то чтод должно быть сделано на заднем фоне, здесь загружаются все объекты с базы данных
+            // делает работу ассинхронно на вторичном потоке
+
+            carArrayList.addAll(database.getCarDao().getAllCars());
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) { // после загрузки данных с базы нужно уведомить адаптер об изменениях
+            super.onPostExecute(aVoid);
+            // метод срабатывает как только метод doInBackground заканчивает свою работу
+            adapter.notifyDataSetChanged();
+        }
     }
 }
